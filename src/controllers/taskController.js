@@ -43,12 +43,14 @@ exports.updateTask = async (req, res) => {
     if (!task) {
       return res.status(404).json({ error: 'Task not found' });
     }
-    const { title, description, dueDate, status, assignedTo } = req.body;
+    const { title, description, dueDate, status, assignedTo,createdAt } = req.body;
     task.title = title;
     task.description = description;
     task.due_date = dueDate;
     task.status = status;
     task.assigned_to = assignedTo;
+    task.created_at = createdAt;
+    task.updated_at = Date.now(); 
     await task.save();
     res.json(task);
   } catch (err) {
